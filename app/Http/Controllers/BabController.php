@@ -34,6 +34,7 @@ class BabController extends Controller
 
         return view('bermain.show', [
             'data_sesi' => $data_sesi,
+            'id_bab' => $id_bab,
             'user' => $user,
             'slug_sesi' => $slug
         ]);

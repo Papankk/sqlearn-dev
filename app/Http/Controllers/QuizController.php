@@ -78,30 +78,18 @@ class QuizController extends Controller
             if ($questions[$questionIndex]['type'] === "multiple_ordered") {
                 // Check if ordered multiple matches exactly
                 $isCorrect = $correctAnswer === $userAnswer;
-
-                $user->exp += 10;
-                $user->save();
             } else if ($questions[$questionIndex]['type'] === "multiple") {
                 // Sort both arrays before comparison (ignoring order)
                 sort($correctAnswer);
                 sort($userAnswer);
                 $isCorrect = $correctAnswer == $userAnswer;
-
-                $user->exp += 10;
-                $user->save();
             } else {
                 // Ensure correctAnswer and userAnswer are strings before using strtolower and trim
-                $isCorrect = strtolower(trim($correctAnswer[0])) == strtolower(trim($userAnswer));;
-
-                $user->exp += 10;
-                $user->save();
+                $isCorrect = strtolower(trim($correctAnswer[0])) == strtolower(trim($userAnswer));
             }
         }
 
-        if ($isCorrect) {
-            $user->exp += 10;
-            $user->save();
-        } else {
+        if (!$isCorrect) {
             if ($user->heart > 0) {
                 $user->heart -= 1; // Decrease heart count
                 $user->save(); // Save to the database
@@ -110,6 +98,34 @@ class QuizController extends Controller
 
         return response()->json([
             'correct' => $isCorrect
+        ]);
+    }
+
+    public function submitFinalAnswer(Request $request, $slug)
+    {
+        $user = User::find(Auth::id());
+        $questions = session("quiz_questions");
+
+        if (!$questions) {
+            return response()->json(['error' => 'Quiz session expired. Refresh the page.'], 400);
+        }
+
+        $totalQuestions = count($questions);
+        $correctAnswers = $request->correct_answers; // Expecting count of correct answers from frontend
+
+        // EXP Calculation: Example (10 EXP per correct answer)
+        $earnedEXP = $correctAnswers * 10;
+
+        // Update user EXP
+        $user->exp += $earnedEXP;
+        $user->current_session += 1;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'earned_exp' => $earnedEXP,
+            'correct_answers' => $correctAnswers,
+            'total_exp' => $user->exp
         ]);
     }
 }

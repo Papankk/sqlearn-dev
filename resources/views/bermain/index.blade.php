@@ -28,15 +28,13 @@
                                             <i class="ri-arrow-up-s-line fs-18 collapse-close"></i>
                                         </a>
                                     </div>
-
-
                                     <div class="collapse show border-top" id="collapseExample">
                                         <div class="card-body">
                                             <h6 class="card-text fw-medium">{{ $bab->header }}</h6>
                                             <p class="card-text mb-0">{{ $bab->deskripsi }}</p>
                                         </div>
                                         <div class="card-footer">
-                                            <a href="/bermain/{{ $bab->slug }}" class="btn btn-primary">More</a>
+                                            <a href="/bermain/{{ $bab->slug }}" class="btn btn-primary">Lanjut</a>
                                         </div>
                                     </div>
                                 </div>

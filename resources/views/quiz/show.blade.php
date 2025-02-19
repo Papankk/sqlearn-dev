@@ -5,8 +5,9 @@
         <div class="d-flex justify-content-center align-items-center pt-2">
             <div class="col-lg-10 p-3">
                 <div class="d-flex justify-content-between align-items-center w-100">
+                    <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
                     <!-- Progress Bar -->
-                    <div class="col flex-grow-1 me-3">
+                    <div class="col flex-grow-1 mx-3">
                         <div class="progress progress-xl progress-animate custom-progress-4 w-100" role="progressbar"
                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-primary-gradient" id="progress-bar" style="width: 0%"></div>
@@ -16,7 +17,7 @@
 
                     <div class="d-flex align-items-center">
                         <span class="avatar avatar-xs me-2">
-                            <img src="../assets/images/medal/heart.svg" alt="rank">
+                            <img src="{{ asset('assets/images/medal/heart.svg') }}" alt="rank">
                         </span>
                         <p class="h6 text-danger mb-0 fw-semibold" id="lives">{{ Auth::user()->heart }}</p>
                     </div>
@@ -57,7 +58,7 @@
             </div>
             <div class="col-lg-6 d-flex justify-content-end">
                 <button class="btn btn-purple btn-lg btn-raised-shadow active btn-wave transition" id="next-btn"
-                    role="button" data-bs-toggle="button" aria-pressed="true">Check Answer</button>
+                    role="button" data-bs-toggle="button" aria-pressed="true">Periksa Jawaban</button>
             </div>
         </div>
     </div>
@@ -75,6 +76,57 @@
             <div class="modal-body text-center">
                 <p>You have run out of hearts! Please wait for them to refill or purchase more.</p>
                 <button type="button" class="btn btn-secondary" id="redirectBackBtn">Go Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="alert custom-alert1 alert-danger">
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-x"></i>
+                </button>
+                <div class="text-center px-5 pb-0 svg-danger">
+                    <svg class="custom-alert-icon" xmlns="http://www.w3.org/2000/svg" height="5rem" viewBox="0 0 24 24"
+                        width="5rem" fill="#000000">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path
+                            d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM12 17.3c-.72 0-1.3-.58-1.3-1.3 0-.72.58-1.3 1.3-1.3.72 0 1.3.58 1.3 1.3 0 .72-.58 1.3-1.3 1.3zm1-4.3h-2V7h2v6z">
+                        </path>
+                    </svg>
+                    <h5>Anda Yakin ?</h5>
+                    <p class="">Jangan pergi dulu! Progresmu akan hilang kalau kamu berhenti
+                        sekarang!</p>
+                    <div class="">
+                        <form action="{{ route('bermain.show', ['slug' => $quiz_slug]) }}" method="get">
+                            <button class="btn btn-md btn-danger m-1">Akhiri sesi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Final Result Modal -->
+<div class="modal fade" id="finalResultModal" tabindex="-1" aria-labelledby="finalResultModalLabel"
+    data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="finalResultModalLabel">Yeay! 🎉</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="fw-bold">Kamu menerima <span id="xp-earned" class="text-primary">0</span> XP! ⭐</h3>
+                <p class="fs-5">Jawaban Benar: <span id="correct-answer-count"
+                        class="fw-bold text-success">0</span></p>
+                <p class="fs-5">XP kamu saat ini sebanyak <span id="user-xp" class="fw-bold">0</span> XP! ⭐</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="close-final-modal">Lanjut</button>
             </div>
         </div>
     </div>
@@ -99,16 +151,12 @@
     let quizSlug = "{{ $slug }}";
     let questions = @json($questions);
     let currentQuestionIndex = 0;
+    let correctAnswerCount = 0;
+    let earnedXP = 0;
     let lives = "{{ Auth::user()->heart }}";
     let answerChecked = false;
 
     function loadQuestion() {
-        if (currentQuestionIndex >= questions.length) {
-            alert("Quiz finished! Redirecting...");
-            window.location.href = `/`;
-            return;
-        }
-
         let question = questions[currentQuestionIndex];
 
         document.getElementById("question-number").innerText = currentQuestionIndex + 1;
@@ -147,7 +195,7 @@
         footer.className = "footer mt-auto py-3 bg-white text-center transition";
 
         let nextBtn = document.getElementById("next-btn");
-        nextBtn.innerText = "Check Answer";
+        nextBtn.innerText = "Periksa Jawaban";
         nextBtn.className = "btn btn-purple btn-lg btn-raised-shadow active btn-wave transition";
         nextBtn.disabled = false;
         answerChecked = false;
@@ -208,15 +256,16 @@
                         return;
                     }
                     if (data.correct) {
+                        correctAnswerCount++;
                         footer.classList.add("bd-green-800");
-                        feedback.innerHTML = "✅ Correct!";
+                        feedback.innerHTML = "✅ Jawaban Benar!";
                         feedback.classList.add("text-white", "opacity-100");
                         nextBtn.classList.add("btn-success");
                     } else {
                         lives--;
                         document.getElementById("lives").innerText = lives;
                         footer.classList.add("bd-red-800");
-                        feedback.innerHTML = "❌ Incorrect! Try again.";
+                        feedback.innerHTML = "❌ Jawaban Salah!";
                         feedback.classList.add("text-white", "opacity-100");
                         nextBtn.classList.add("btn-danger");
 
@@ -234,14 +283,52 @@
                         }
                     }
 
-                    nextBtn.innerText = "Next";
+                    nextBtn.innerText = "Lanjut";
                     answerChecked = true;
                 })
                 .catch(error => console.error("Error:", error));
         } else {
-            currentQuestionIndex++;
-            loadQuestion();
+            if (currentQuestionIndex >= questions.length - 1) {
+                submitFinalAnswer();
+            } else {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
         }
+    });
+
+    function submitFinalAnswer() {
+        fetch(`/quiz/${quizSlug}/final-answer`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    correct_answers: correctAnswerCount // Keep track of correct answers in JS
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    correctAnswerCount = data.correct_answers;
+                    earnedXP = data.earned_exp;
+
+                    // Update modal with correct answer count & XP
+                    document.getElementById("xp-earned").innerText = earnedXP;
+                    document.getElementById("correct-answer-count").innerText = correctAnswerCount;
+                    document.getElementById("user-xp").innerText = data.total_exp;
+
+                    // Show the final result modal
+                    let finalResultModal = new bootstrap.Modal(document.getElementById('finalResultModal'));
+                    finalResultModal.show();
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+    document.getElementById("close-final-modal").addEventListener("click", function() {
+        window.location.href = `/bermain/{{ $quiz_slug }}`;
     });
 
     loadQuestion();

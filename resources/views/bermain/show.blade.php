@@ -27,7 +27,11 @@
                                         <div class="card-body">
                                             <div class="d-flex align-items-center w-100">
                                                 <div class="me-2">
-                                                    <i class="bx bx-lock-open" style="font-size: 32px;"></i>
+                                                    @if (Auth::user()->current_session < $sesi->id)
+                                                        <i class="bx bx-lock" style="font-size: 32px;"></i>
+                                                    @else
+                                                        <i class="bx bx-lock-open" style="font-size: 32px;"></i>
+                                                    @endif
                                                 </div>
                                                 <div>
                                                     <div class="fs-15 fw-medium">{{ $sesi->nama_sesi }}</div>
@@ -160,6 +164,34 @@
             });
         </script>
     @endif
+
+    <!-- Modal for Locked Session -->
+    <div class="modal fade" id="lockedSessionModal" tabindex="-1" aria-labelledby="lockedSessionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lockedSessionModalLabel">🔒 Sesi Terkunci</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Kamu harus menyelesaikan sesi sebelumnya untuk mengakses sesi ini.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('session_locked'))
+                let lockedSessionModal = new bootstrap.Modal(document.getElementById('lockedSessionModal'));
+                lockedSessionModal.show();
+            @endif
+        });
+    </script>
 
     <!-- Out of Hearts Modal -->
     <div class="modal fade" id="outOfHeartsModal" tabindex="-1" aria-labelledby="outOfHeartsLabel" aria-hidden="true">

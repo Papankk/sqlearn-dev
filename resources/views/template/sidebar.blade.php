@@ -61,7 +61,8 @@
 
                 <!-- Start::slide -->
                 <li class="slide">
-                    <a href="/leaderboard" class="side-menu__item">
+                    <a href="/leaderboard"
+                        class="side-menu__item {{ Route::currentRouteName() == 'leaderboard.index' ? 'active' : '' }}">
                         <i class="side-menu__angle"></i>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

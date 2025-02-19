@@ -5,8 +5,10 @@ use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BabController;
 use App\Http\Controllers\BelajarController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\QuizController;
 use App\Http\Middleware\CheckHearts;
+use App\Http\Middleware\CheckSessionAccess;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', function () {
@@ -27,11 +29,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/belajar', [BelajarController::class, 'index'])->name('belajar.index');
     Route::get('/belajar/{slug}', [BelajarController::class, 'show'])->name('belajar.show');
+
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 });
 
-Route::middleware(['auth', CheckHearts::class])->group(function () {
+Route::middleware(['auth', CheckHearts::class, CheckSessionAccess::class])->group(function () {
     Route::get('/quiz/{slug}', [QuizController::class, 'show'])->name('quiz.show');
     Route::post('/quiz/{slug}/answer', [QuizController::class, 'submitAnswer'])->name('quiz.answer');
+    Route::post('/quiz/{slug}/final-answer', [QuizController::class, 'submitFinalAnswer'])->name('quiz.final-answer');
 });
 
 // Auth Routes (Login, Register, etc.)
