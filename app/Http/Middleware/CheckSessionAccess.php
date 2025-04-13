@@ -23,7 +23,6 @@ class CheckSessionAccess
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'session_locked'], 403);
             }
-            return redirect()->back()->with('session_locked', true);
         }
 
         return $next($request);

@@ -29,10 +29,8 @@
                                                 <span
                                                     class="d-block fw-medium text-muted mb-2">{{ '@' . Auth::user()->username }}</span>
                                                 <div class="border-block-end">
-                                                    <span class="d-block fw-normal text-muted">Lorem ipsum, dolor
-                                                        sit amet consectetur adipisicing elit. Laborum modi dicta,
-                                                        impedit corrupti pariatur distinctio? Asperiores cupiditate
-                                                        quas exercitationem repellat?</span>
+                                                    <span
+                                                        class="d-block fw-normal text-muted">{{ Auth::user()->bio }}</span>
                                                 </div>
 
                                             </div>

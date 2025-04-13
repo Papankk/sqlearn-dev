@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BabSeeder::class,
             SesiSeeder::class,
-            SoalSeeder::class,
+            Soal1Seeder::class,
+            Soal2Seeder::class,
+            Soal3Seeder::class,
+            Soal4Seeder::class,
             MateriSeeder::class,
         ]);
     }

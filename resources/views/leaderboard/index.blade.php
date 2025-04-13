@@ -3,7 +3,6 @@
 @section('title', 'Leaderboard - SQLearn')
 
 @section('content')
-
     <!-- Start::app-content -->
     <div class="main-content app-content">
         <div class="container-fluid">
@@ -142,11 +141,51 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-xl-12">
+                        <p class="h6 fw-medium mb-3 text-primary">Peringkat Saya
+                        </p>
+                        <div class="card custom-card border border-primary text-center p-5">
+                            <div class="card-body ">
+                                <span class="avatar avatar-xxl avatar-rounded justify-content-between mb-3">
+                                    <img src="{{ asset('assets/images/faces') . '/' . Auth::user()->foto_profile }}"
+                                        alt="img">
+                                </span>
+                                <div class="fw-medium fs-16 mb-3">
+                                    {{ Auth::user()->name }}
+                                    <p class="text-muted small mb-0">{{ '@' . Auth::user()->username }}</p>
+                                </div>
+                                <div
+                                    class="card custom-card border border-primary d-flex align-items-center justify-content-center p-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-md me-2 avatar-rounded">
+                                            @if ($userRank == 1)
+                                                <img src="{{ asset('assets/images/medal/medal bow 1.svg') }}"
+                                                    alt="img">
+                                            @elseif ($userRank == 2)
+                                                <img src="{{ asset('assets/images/medal/medal bow 2.svg') }}"
+                                                    alt="img">
+                                            @elseif ($userRank == 3)
+                                                <img src="{{ asset('assets/images/medal/medal bow 3.svg') }}"
+                                                    alt="img">
+                                            @else
+                                            @endif
+                                        </div>
+                                        <p class="h6 mb-0">Peringkat ke - <span
+                                                class="text-primary fw-bold">{{ $userRank }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            <!-- leaderboard -->
 
         </div>
+        <!-- leaderboard -->
     </div>
     <!-- End::app-content -->
 

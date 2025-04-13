@@ -97,7 +97,8 @@ class QuizController extends Controller
         }
 
         return response()->json([
-            'correct' => $isCorrect
+            'correct' => $isCorrect,
+            'correct_answer' => $correctAnswer
         ]);
     }
 

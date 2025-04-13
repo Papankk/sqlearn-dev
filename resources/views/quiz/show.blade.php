@@ -265,9 +265,33 @@
                         lives--;
                         document.getElementById("lives").innerText = lives;
                         footer.classList.add("bd-red-800");
-                        feedback.innerHTML = "❌ Jawaban Salah!";
                         feedback.classList.add("text-white", "opacity-100");
                         nextBtn.classList.add("btn-danger");
+
+                        let correctAnswers = Array.isArray(data.correct_answer) ?
+                            data.correct_answer : [data.correct_answer];
+
+                        if (questions[currentQuestionIndex].type === "text") {
+                            feedback.innerHTML =
+                                `❌ Jawaban Salah! <br><span class="fw-bold text-success">Jawaban yang benar: ${correctAnswers.join(", ")}</span>`;
+                        } else {
+                            feedback.innerHTML = "❌ Jawaban Salah!";
+
+                            // ✅ Highlight correct answer if it's multiple choice
+                            correctAnswers.forEach(correct => {
+                                document.querySelectorAll("input[name='answer']").forEach(
+                                    option => {
+                                        if (option.value == correct) {
+                                            let label = document.querySelector(
+                                                `label[for="${option.id}"]`);
+                                            if (label) {
+                                                label.classList.remove("btn-outline-primary");
+                                                label.classList.add("btn-success");
+                                            }
+                                        }
+                                    });
+                            });
+                        }
 
                         if (lives <= 0) {
                             let outOfHeartsModal = new bootstrap.Modal(document.getElementById(

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('diamond')->default(20);
             $table->integer('exp')->default(0);
             $table->integer('current_session')->default(1);
+            $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

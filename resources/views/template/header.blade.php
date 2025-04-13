@@ -110,6 +110,11 @@
                     <li><a class="dropdown-item d-flex align-items-center" href="/profil"><i
                                 class="fe fe-user p-1 rounded-circle bg-primary-transparent me-2 fs-16"></i>Profil</a>
                     </li>
+                    @if (Auth::user()->is_admin == 1)
+                        <li><a class="dropdown-item d-flex align-items-center" href="/admin"><i
+                                    class="fe fe-settings p-1 rounded-circle bg-primary-transparent me-2 fs-16"></i>Admin</a>
+                        </li>
+                    @endif
                     {{-- <li><a class="dropdown-item d-flex align-items-center" href="/pengaturan"><i
                                 class="fe fe-settings p-1 rounded-circle bg-primary-transparent ings me-2 fs-16"></i>Settings</a>
                     </li> --}}

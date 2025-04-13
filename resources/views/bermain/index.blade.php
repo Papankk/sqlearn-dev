@@ -19,16 +19,15 @@
                                         class="card-header justify-content-between border-bottom-0 d-flex align-items-center">
                                         <div class="card-title d-flex align-items-center">
                                             {{ $bab->nama_bab }}
-                                            <i class="bx bx-lock-open ms-2 fs-5 align-text-bottom"></i>
                                         </div>
                                         <a href="javascript:void(0);" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseExample" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            <i class="ri-arrow-down-s-line fs-18 collapse-open"></i>
+                                            data-bs-target="#collapseExample{{ $bab->slug }}" aria-expanded="false"
+                                            aria-controls="collapseExample{{ $bab->slug }}">
                                             <i class="ri-arrow-up-s-line fs-18 collapse-close"></i>
+                                            <i class="ri-arrow-down-s-line fs-18 collapse-open"></i>
                                         </a>
                                     </div>
-                                    <div class="collapse show border-top" id="collapseExample">
+                                    <div class="collapse show border-top" id="collapseExample{{ $bab->slug }}">
                                         <div class="card-body">
                                             <h6 class="card-text fw-medium">{{ $bab->header }}</h6>
                                             <p class="card-text mb-0">{{ $bab->deskripsi }}</p>
