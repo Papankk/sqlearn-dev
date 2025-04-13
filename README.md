@@ -10,9 +10,6 @@ Fitur Utama
 *   **Materi Pembelajaran:** Menyediakan materi pembelajaran untuk membantu pengguna memahami konsep SQL sebelum mengikuti kuis.
 *   **Tingkatan Bab:** Kuis dan materi dibagi berdasarkan tingkatan bab agar sesuai dengan kemampuan pengguna.
 
-Instalasi
----------
-
 Teknologi yang Digunakan
 ---------
 
