@@ -13,12 +13,12 @@ Fitur Utama
 Teknologi yang Digunakan
 ---------
 
-- [Laravel](https://laravel.com/) (vX.X)
+- [Laravel](https://laravel.com/) (v11.x)
 - PHP (v8.x)
 - MySQL
-- Bootstrap / TailwindCSS
-- JavaScript (jQuery / Vue.js / lainnya jika ada)
-- [Tambahan lainnya, seperti: Midtrans, Chart.js, dll]
+- Bootstrap
+- JavaScript (ApexCharts, ChoicesJS, DropzoneJS, dll)
+- Midtrans
 
 Tim Pengembang
 ---------
@@ -35,14 +35,14 @@ Sebelum memulai, pastikan Anda sudah menginstal hal berikut:
 *   Composer
 *   MySQL atau MariaDB
 *   Node.js (untuk mengelola frontend dependencies)
-*   Laravel 8.x atau yang lebih baru
+*   Laravel 10.x atau yang lebih baru
 
 ### Langkah Instalasi
 
 1.  **Clone repository**  
     Pertama, clone repository ini ke dalam direktori lokal Anda:
     
-        git clone https://github.com/username/sqllearn.git
+        git clone https://github.com/username/sqlearn-dev.git
         cd sqllearn
     
 2.  **Instalasi dependensi backend (PHP)**  
@@ -60,7 +60,7 @@ Sebelum memulai, pastikan Anda sudah menginstal hal berikut:
         DB_CONNECTION=mysql
         DB_HOST=127.0.0.1
         DB_PORT=3306
-        DB_DATABASE=sqllearn
+        DB_DATABASE=sqlearn-dev
         DB_USERNAME=root
         DB_PASSWORD=
     
