@@ -13,6 +13,23 @@ Fitur Utama
 Instalasi
 ---------
 
+Teknologi yang Digunakan
+---------
+
+- [Laravel](https://laravel.com/) (vX.X)
+- PHP (v8.x)
+- MySQL
+- Bootstrap / TailwindCSS
+- JavaScript (jQuery / Vue.js / lainnya jika ada)
+- [Tambahan lainnya, seperti: Midtrans, Chart.js, dll]
+
+Tim Pengembang
+---------
+
+- [Muhammad Zulfan](https://github.com/Papankk) – [Project Manager]
+- [Nama 2] – [Frontend Developer]
+- [Nama 3] – [Fullstack / QA / Project Manager, dll]
+
 ### Prasyarat
 
 Sebelum memulai, pastikan Anda sudah menginstal hal berikut:
