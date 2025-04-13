@@ -43,7 +43,7 @@ Sebelum memulai, pastikan Anda sudah menginstal hal berikut:
     Pertama, clone repository ini ke dalam direktori lokal Anda:
     
         git clone https://github.com/username/sqlearn-dev.git
-        cd sqllearn
+        cd sqlearn-dev
     
 2.  **Instalasi dependensi backend (PHP)**  
     Instal dependensi PHP dengan menggunakan Composer:
