@@ -56,4 +56,35 @@ class ShopController extends Controller
 
         return response()->json(['snap_token' => $snapToken]);
     }
+
+    public function refillHeart()
+    {
+        $user = Auth::user();
+
+        // Check if user has enough diamonds
+        if ($user->diamond < 50) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Tidak cukup diamond untuk melanjutkan transaksi!'
+            ], 400);
+        }
+
+        if ($user->heart == 5) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Hatimu sudah penuh!'
+            ], 400);
+        }
+
+        // Deduct diamonds and refill heart
+        $user->diamond -= 50;
+        $user->heart = 5;
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Hatimu telah dipulihkan! Kamu sekarang memiliki ' . $user->diamond . ' diamond tersisa.',
+            'diamonds_left' => $user->diamond
+        ]);
+    }
 }

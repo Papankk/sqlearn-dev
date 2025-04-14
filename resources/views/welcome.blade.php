@@ -14,6 +14,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="Description" content="Codeigniter Bootstrap Responsive Admin Web Dashboard Template">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
     <meta name="Author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="php, php dashboard, php template, php admin panel, php admin, admin template, bootstrap admin template, dashboard admin template, php frameworks, php my admin, admin, best php framework, php backend, admin php, dashboard, admin panel template.">
@@ -118,8 +120,8 @@
                 <p class="switcher-style-head">Theme Primary:</p>
                 <div class="d-flex align-items-center switcher-style">
                     <div class="form-check switch-select me-3">
-                        <input class="form-check-input color-input color-primary-1" type="radio" name="theme-primary"
-                            id="switcher-primary">
+                        <input class="form-check-input color-input color-primary-1" type="radio"
+                            name="theme-primary" id="switcher-primary">
                     </div>
                     <div class="form-check switch-select me-3">
                         <input class="form-check-input color-input color-primary-2" type="radio"

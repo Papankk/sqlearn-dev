@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
     Route::post('/topup', [ShopController::class, 'createTransaction'])->name('shop.topup');
+    Route::post('/refill-heart', [ShopController::class, 'refillHeart']);
 });
 
 Route::middleware(['auth', CheckHearts::class, CheckSessionAccess::class])->group(function () {
