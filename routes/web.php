@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Toko / shop
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
     Route::post('/topup', [ShopController::class, 'createTransaction'])->name('shop.topup');
+    Route::post('/refill-heart', [ShopController::class, 'refillHeart']);
 });
 
 // Route untuk kuis yang hanya bisa diakses jika sudah login, punya hati, dan punya akses sesi
