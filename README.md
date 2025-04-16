@@ -23,9 +23,11 @@ Teknologi yang Digunakan
 Tim Pengembang
 ---------
 
-- [Muhammad Zulfan](https://github.com/Papankk) – [Project Manager]
-- [Nama 2] – [Frontend Developer]
-- [Nama 3] – [Fullstack / QA / Project Manager, dll]
+- [Muhammad Zulfan Naharuddin](https://github.com/Papankk) – [Project Manager]
+- [Syeril Azalela Rivera](https://github.com/syerilazalea) – [Frontend Developer]
+- [Arya Cahya Ardi Pratama](https://github.com/Yochuu) – [Backend Manager]
+- [Zhahira Friska Novanda](https://github.com/zhahiraanvnn) – [System Analyst]
+- [Muhammad Raziq Jamalul Katsir Prasetya](https://github.com/RaziqPrasetya25) – [Quality Assurance]
 
 ### Prasyarat
 
