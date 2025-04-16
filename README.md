@@ -9,6 +9,7 @@ Fitur Utama
 *   **Kuis SQL:** Berbagai kuis yang disesuaikan dengan tingkat kesulitan bab SQL.
 *   **Materi Pembelajaran:** Menyediakan materi pembelajaran untuk membantu pengguna memahami konsep SQL sebelum mengikuti kuis.
 *   **Tingkatan Bab:** Kuis dan materi dibagi berdasarkan tingkatan bab agar sesuai dengan kemampuan pengguna.
+*   **Leaderboard:** Pengguna bisa melihat peringkat xp dirinya dan pengguna lainnya agar tetap termotivasi.
 
 Teknologi yang Digunakan
 ---------
